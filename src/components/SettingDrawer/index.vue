@@ -41,7 +41,7 @@
 export default {
   data() {
     return {
-      visible: false
+      visible: false,
     };
   },
   methods: {
@@ -51,8 +51,8 @@ export default {
     },
     onClose() {
       this.visible = false;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

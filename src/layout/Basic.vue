@@ -7,9 +7,10 @@
         :trigger="null"
         collapsible
         v-model="collapsed"
+        width="256px"
       >
         <div class="logo">ADVP</div>
-        <SideMenu />
+        <SideMenu :f="f" />
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
@@ -33,30 +34,30 @@
 </template>
 
 <script>
-import Header from "./Header";
-import Footer from "./Footer";
-import SideMenu from "./SideMenu";
-import SettingDrawer from "../components/SettingDrawer";
+import Header from './Header';
+import Footer from './Footer';
+import SideMenu from './SideMenu';
+import SettingDrawer from '../components/SettingDrawer';
 export default {
   components: {
     Header,
     Footer,
     SideMenu,
-    SettingDrawer
+    SettingDrawer,
   },
   data() {
     return {
-      collapsed: false
+      collapsed: false,
     };
   },
   computed: {
     n() {
-      return this.$route.query.n || "left";
+      return this.$route.query.n || 'left';
     },
     f() {
-      return this.$route.query.f || "dark";
-    }
-  }
+      return this.$route.query.f || 'dark';
+    },
+  },
 };
 </script>
 
