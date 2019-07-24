@@ -108,8 +108,11 @@ const r = new Router({
   ]
 });
 
-r.beforeEach((f, t, n) => {
-  NProgress.start();
+r.beforeEach((t, f, n) => {
+  if (t.path != f.path) {
+    NProgress.start();
+  }
+
   n();
 });
 r.afterEach(() => {

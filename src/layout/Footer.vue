@@ -1,5 +1,5 @@
 <template>
-  <div>Footer</div>
+  <div>This is my first time &copy; 2019</div>
 </template>
 
 <script>
