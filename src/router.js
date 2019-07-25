@@ -1,8 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import NotFound from './views/404.vue';
+import Forbidden from './views/403.vue';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import findLast from 'lodash/findLast';
+import { check, isLogin } from './utils/auth';
+import { notification } from 'ant-design-vue';
 
 Vue.use(Router);
 
@@ -36,6 +40,9 @@ const r = new Router({
     },
     {
       path: '/',
+      meta: {
+        authority: ['user', 'admin'],
+      },
       component: () =>
         import(/* webpackChunkName: "layout" */ './layout/Basic.vue'),
       children: [
@@ -69,6 +76,7 @@ const r = new Router({
           meta: {
             icon: 'form',
             title: '表单',
+            authority: ['admin'],
           },
           component: { render: h => h('router-view') },
           children: [
@@ -120,6 +128,12 @@ const r = new Router({
       ],
     },
     {
+      path: '/403',
+      name: '403',
+      hideInMenu: true,
+      component: Forbidden,
+    },
+    {
       path: '*',
       name: '404',
       hideInMenu: true,
@@ -132,7 +146,23 @@ r.beforeEach((t, f, n) => {
   if (t.path != f.path) {
     NProgress.start();
   }
-
+  const record = findLast(t.matched, rec => rec.meta.authority);
+  if (record && !check(record.meta.authority)) {
+    if (!isLogin() && t.path !== '/user/login') {
+      n({
+        path: '/user/login',
+      });
+    } else if (t.path !== '/403') {
+      notification.error({
+        message: '403',
+        description: '联系admin',
+      });
+      n({
+        path: '/403',
+      });
+    }
+    NProgress.done();
+  }
   n();
 });
 r.afterEach(() => {
