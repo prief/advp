@@ -55,6 +55,9 @@ const r = new Router({
             {
               path: '/dashboard/analysis',
               name: 'analysis',
+              meta: {
+                title: '分析页',
+              },
               component: () =>
                 import(/* webpackChunkName: "dashboard" */ './views/dashboard/Analysis.vue'),
             },
@@ -72,12 +75,18 @@ const r = new Router({
             {
               path: '/form/basic-form',
               name: 'basicform',
+              meta: {
+                title: '基础表单',
+              },
               component: () =>
                 import(/* webpackChunkName: "dashboard" */ './views/forms/Basic'),
             },
             {
               path: '/form/step-form',
               name: 'stepform',
+              meta: {
+                title: '分步表单',
+              },
               hideChildrenMenu: true,
               component: () =>
                 import(/* webpackChunkName: "dashboard" */ './views/forms/step'),
