@@ -5,17 +5,16 @@
       style="font-size:100px;margin-top:66px;"
     ></Icon-font>
     <br />
-    <img :src="up" alt="" />
+
+    <up />
   </div>
 </template>
 
 <script>
-import up from '@/assets/up.svg';
+import Up from '@/assets/up.svg';
 export default {
-  data() {
-    return {
-      up,
-    };
+  components: {
+    Up,
   },
 };
 </script>
