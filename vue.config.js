@@ -9,9 +9,11 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://192.168.61.103:8081',
+        target: 'http://172.17.0.197:8080',
         bypass: function(req, res) {
+          console.log('console.log(req.path);===', req.path, process.env.MOCK);
           if (req.headers.accept.indexOf('html') !== -1) {
+            console.log('INDEX.HTML');
             return '/index.html';
           } else if (process.env.MOCK !== 'NO') {
             console.log(req.path);

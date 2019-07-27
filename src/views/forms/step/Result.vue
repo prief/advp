@@ -1,5 +1,5 @@
 <template>
-  <div>result form</div>
+  <div>result form 提交成功，预计2小时到账</div>
 </template>
 
 <script>

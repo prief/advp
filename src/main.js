@@ -11,7 +11,7 @@ import {
   Input,
 } from 'ant-design-vue';
 import router from './router';
-import store from './store';
+import store from './store/index';
 import Authority from './components/Authority';
 import Auth from './directives/auth';
 
