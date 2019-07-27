@@ -16,7 +16,7 @@ export default {
     this.getAnalysisData();
     this.timer = setInterval(() => {
       this.getAnalysisData();
-    }, 2000);
+    }, 200000);
   },
   methods: {
     getAnalysisData() {
