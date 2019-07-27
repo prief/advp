@@ -1,10 +1,31 @@
+const path = require('path');
+const ATWP = require('antd-theme-webpack-plugin');
+
+const option = {
+  antDir: path.join(__dirname, './node_modules/ant-design-vue'),
+  stylesDir: path.join(__dirname, './src'),
+  varFile: path.join(
+    __dirname,
+    './node_modules/ant-design-vue/lib/style/themes/default.less',
+  ),
+  mainLessFile: '',
+  themeVariables: ['@primary-color'],
+  generateOnce: false,
+};
+const themePlugin = new ATWP(option);
 module.exports = {
   css: {
     loaderOptions: {
       less: {
         javascriptEnabled: true,
+        modifyVars: {
+          'primary-color': '#1DA57A',
+        },
       },
     },
+  },
+  configureWebpack: {
+    plugins: [themePlugin],
   },
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
@@ -19,7 +40,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://172.17.0.197:8081',
+        target: 'http://192.168.61.103:8080',
         bypass: function(req, res) {
           console.log('console.log(req.path);===', req.path, process.env.MOCK);
           if (req.headers.accept.indexOf('html') !== -1) {

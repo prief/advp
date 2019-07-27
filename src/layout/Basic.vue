@@ -1,6 +1,6 @@
 <template>
   <div :class="[`n-${n}`, `f-${f}`]">
-    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+    <a-layout class="components-layout-demo-side" style="min-height: 100vh">
       <a-layout-sider
         :theme="f"
         v-if="n === 'left'"
@@ -65,6 +65,9 @@ export default {
 </script>
 
 <style scoped>
+.components-layout-demo-side >>> .ant-menu-dark .ant-menu-item-selected {
+  color: white;
+}
 .trigger {
   padding: 0 20px;
   line-height: 64px;
