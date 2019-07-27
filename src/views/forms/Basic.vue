@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form :layout="formLayout">
+    <a-form :layout="formLayout" :form="form">
       <a-form-item
         label="Form Layout"
         :label-col="formItemLayout.labelCol"
@@ -25,20 +25,34 @@
         label="Field A"
         :label-col="formItemLayout.labelCol"
         :wrapper-col="formItemLayout.wrapperCol"
-        :validate-status="fieldAError"
-        :help="fieldAHelp"
       >
-        <a-input v-model="fieldA" placeholder="input placeholder" />
+        <a-input
+          v-decorator="[
+            'fieldA',
+            {
+              initialValue: fieldA,
+              rules: [
+                {
+                  required: true,
+                  min: 6,
+                  message: 'bixu5',
+                },
+              ],
+            },
+          ]"
+          placeholder="input
+        placeholder"
+        />
       </a-form-item>
       <a-form-item
         label="Field B"
         :label-col="formItemLayout.labelCol"
         :wrapper-col="formItemLayout.wrapperCol"
       >
-        <a-input v-model="fieldB" placeholder="input placeholder" />
+        <a-input v-decorator="['fieldB']" placeholder="input placeholder" />
       </a-form-item>
       <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
-        <a-button type="primary">
+        <a-button type="primary" @click="handleSubmit">
           Submit
         </a-button>
       </a-form-item>
@@ -49,24 +63,17 @@
 <script>
 export default {
   data() {
+    this.form = this.$form.createForm(this);
     return {
       formLayout: 'horizontal',
-      fieldA: '',
+      fieldA: 'hello',
       fieldB: '',
-      fieldAError: '',
-      fieldAHelp: '',
     };
   },
-  watch: {
-    fieldA(v) {
-      if (v.length <= 5) {
-        this.fieldAError = 'error';
-        this.fieldAHelp = '必须大于5个字符';
-      } else {
-        this.fieldAError = '';
-        this.fieldAHelp = '';
-      }
-    },
+  mounted() {
+    setTimeout(() => {
+      this.form.setFieldsValue({ fieldA: 'hello world' });
+    }, 3000);
   },
   computed: {
     formItemLayout() {
@@ -90,6 +97,13 @@ export default {
   methods: {
     handleFormLayoutChange(e) {
       this.formLayout = e.target.value;
+    },
+    handleSubmit() {
+      this.form.validateFields((err, val) => {
+        if (!err) {
+          console.log(val);
+        }
+      });
     },
   },
 };
