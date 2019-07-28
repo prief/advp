@@ -21,7 +21,9 @@ import VueI18N from 'vue-i18n';
 import zhCN from './locale/zhCN';
 import enUS from './locale/enUS';
 import queryString from 'querystring';
-
+import VHJS from 'vue-highlightjs';
+import 'highlight.js/styles/github.css';
+Vue.use(VHJS);
 Vue.config.productionTip = false;
 Vue.component('Authority', Authority);
 Vue.use(Button);

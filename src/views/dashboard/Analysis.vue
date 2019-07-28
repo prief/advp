@@ -3,13 +3,21 @@
     {{ $t('message')['time'] }}
     <a-date-picker></a-date-picker>
     <Charts style="height:400px" :option="opt" />
+    <pre v-highlightjs="chartCode"><code class="html" ></code></pre>
   </div>
 </template>
 
 <script>
 import request from '../../utils/request';
 import Charts from '../../components/Chart';
+import chartCode from '!!raw-loader!../../components/Chart';
 export default {
+  data() {
+    return {
+      opt: {},
+      chartCode,
+    };
+  },
   components: {
     Charts,
   },
@@ -52,11 +60,6 @@ export default {
   },
   destroyed() {
     clearTimeout(this.timer);
-  },
-  data() {
-    return {
-      opt: {},
-    };
   },
 };
 </script>
