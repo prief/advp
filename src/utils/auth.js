@@ -1,5 +1,7 @@
+const cur = ['user'];
+export { cur };
 export function getCA() {
-  return ['admin'];
+  return cur;
 }
 
 export function check(a) {
