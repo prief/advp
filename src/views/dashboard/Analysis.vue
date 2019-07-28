@@ -1,6 +1,7 @@
 <template>
   <div>
-    analysis
+    {{ $t('message')['time'] }}
+    <a-date-picker></a-date-picker>
     <Charts style="height:400px" :option="opt" />
   </div>
 </template>
